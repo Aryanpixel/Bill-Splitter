@@ -1,0 +1,242 @@
+/* src/styles/Dashboard.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* { box-sizing: border-box; }
+
+body { 
+  margin: 0; 
+  font-family: 'Inter', sans-serif; 
+  background-color: #f8fafc; 
+  color: #0f172a; 
+}
+
+/* Layout & Navbar */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.top-navbar {
+  height: 70px;
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.nav-brand {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 1.25rem; font-weight: 700; color: #0f172a;
+}
+
+.brand-logo {
+  width: 32px; height: 32px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; font-weight: bold;
+}
+
+.nav-center { display: flex; gap: 8px; cursor: pointer; }
+
+.nav-link {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 16px;
+  color: #64748b; text-decoration: none;
+  border-radius: 8px; font-weight: 500; font-size: 0.95rem;
+  transition: all 0.2s;
+}
+
+.nav-link:hover { background-color: #f1f5f9; color: #0f172a; }
+.nav-link.active { background-color: #eef2ff; color: #6366f1; }
+
+.nav-right {
+  display: flex; align-items: center; gap: 16px;
+  font-size: 0.9rem; font-weight: 500; color: #334155;
+}
+
+.logout-btn { color: #64748b; cursor: pointer; display: flex; align-items: center; }
+.logout-btn:hover { color: #0f172a; }
+
+.main-content {
+  flex: 1; padding: 40px; max-width: 100%; width: 100%; margin: 0 auto;
+}
+
+/* Page Header */
+.page-header {
+  display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px;
+}
+h1 { font-size: 1.875rem; font-weight: 700; margin: 0 0 8px 0; color: #0f172a; }
+.subtitle { color: #64748b; margin: 0; font-size: 1rem; }
+h3 { font-size: 1.1rem; font-weight: 600; color: #0f172a; margin-bottom: 16px; }
+
+/* Stats Grid */
+.stats-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 48px;
+}
+
+.stat-card {
+  background: white; border: 1px solid #e2e8f0; border-radius: 12px;
+  padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.stat-label { font-size: 0.875rem; font-weight: 500; color: #64748b; margin-bottom: 8px; }
+.stat-value { font-size: 2rem; font-weight: 700; color: #0f172a; }
+.text-green { color: #10b981; }
+.text-red { color: #ef4444; }
+.trend-icon { text-align: right; margin-top: -20px; }
+
+/* Dashboard Content Grid */
+.dashboard-content-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
+.section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.view-all-link {
+  color: #64748b;
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-bottom: 0px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* Empty State */
+.empty-state-card {
+  min-height: 250px; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; text-align: center; margin-top: 30px;
+}
+.empty-state-icon { margin-bottom: 16px; color: #94a3b8; }
+.empty-title { font-weight: 600; font-size: 1.1rem; margin-bottom: 8px; }
+.empty-desc { font-size: 0.95rem; color: #64748b; margin-bottom: 24px; max-width: 300px; }
+
+/* Button */
+.btn-primary {
+  background: linear-gradient(to right, #6366f1, #8b5cf6);
+  color: white; border: none; padding: 10px 20px;
+  border-radius: 8px; font-weight: 500; cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.2);
+}
+.btn-icon { display: flex; align-items: center; gap: 8px; padding: 12px 24px; position: relative; left: 275px; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .dashboard-content-grid, .stats-grid { grid-template-columns: 1fr; }
+  .top-navbar { padding: 0 20px; }
+}
+
+/* =========================
+   Group Card – Splitwise Style
+   ========================= */
+
+.group-card {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 16px;
+}
+
+.group-card:hover {
+  background: #f8fafc;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
+}
+
+.group-card-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.group-avatar {
+  width: 60px; 
+  height: 60px; 
+  border-radius: 12px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  color: white; 
+  font-size: 1.2rem; 
+  font-weight: 700; 
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #8b5cf6, #a78bfa); 
+  
+}
+
+.group-info {
+  display:flex;
+  flex-direction: column;
+}
+
+.group-name {
+font-weight: 600; font-size: 1.5rem; color: #0f172a; margin-bottom: 3px; position: relative; bottom: 15px; left: -20px;
+}
+
+.group-meta {
+  font-size: 1rem; color: #64748b; margin-bottom: 0px; position: relative; bottom: 23px;
+}
+
+.group-card-arrow {
+  font-size: 20px;
+  color: #94a3b8;
+}
+
+/* Activity History */
+
+.activity-card {
+  padding: 16px;
+}
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #f9fafb;
+}
+
+.activity-item.expense {
+  border-left: 4px solid #6366f1;
+}
+
+.activity-item.payment {
+  border-left: 4px solid #10b981;
+}
+
+.activity-icon {
+  font-size: 20px;
+  margin-right: 12px;
+}
+
+.activity-text {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+}
+
+.activity-text span {
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.empty-history {
+  text-align: center;
+  color: #9ca3af;
+  font-size: 14px;
+}
