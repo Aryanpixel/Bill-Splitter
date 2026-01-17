@@ -25,6 +25,25 @@ const GroupList = () => {
       })
       .catch(err => console.error(err));
   }, []);
+  //! User data accessing
+    const[UserName, setUserName]= useState("");
+  
+    useEffect(() => {
+      const storedUser = localStorage.getItem('user');
+  
+      if (!storedUser || storedUser === 'undefined') {
+        navigate('/login');
+        return;
+      }
+  
+      try {
+        const user = JSON.parse(storedUser)
+  
+        setUserName(user.name || '');
+      } catch (error) {
+        navigate('/login');
+      }
+    }, [navigate]);
   
 
   return (
@@ -36,7 +55,7 @@ const GroupList = () => {
           <a onClick={() => handleClick('/Groups')} className="nav-link active">Groups</a>
           <a onClick={() => handleClick('/Profile')} className="nav-link">Profile</a>
         </div>
-        <div className="nav-right"><span>Hey, Alex</span></div>
+        <div className="nav-right"><span>Hey, {UserName}</span></div>
       </nav>
 
       <main className="main-content">
