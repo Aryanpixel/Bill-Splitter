@@ -50,7 +50,7 @@ router.post('/Signup', async (req, res) => {
     } 
     catch(error){
         console.log("Signup Error:", error);
-        res.status(500).json({message: data.error})
+        res.status(500).json({message: error.message})
     }
 });
 
