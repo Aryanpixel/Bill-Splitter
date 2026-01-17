@@ -14,6 +14,7 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const MONGO_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/Bill-Splitter';
 
 
 
@@ -27,7 +28,7 @@ app.use("/api/auth", paymentRoutes);
 
 
 // MongoDB Connection
-mongoose.connect('mongodb://localhost:27017/SplitX')
+mongoose.connect(MONGO_URI)
 .then(() => console.log('✅ MongoDB Connected'))
 .catch((err) => console.error('❌ MongoDB Error:', err));
 
