@@ -19,7 +19,7 @@ const MONGODB_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/Bill-Spl
 
 
 // Middleware
-app.use(cors({origin:'https://bill-splitter-jhao.onrender.com'}));
+app.use(cors({origin:'https://bill-splitter-6pz4euyax-aryans-projects-f7ef1de3.vercel.app/'}));
 app.use(express.json());
 app.use("/api/auth", auth);
 app.use("/api/auth", groupRoutes);
