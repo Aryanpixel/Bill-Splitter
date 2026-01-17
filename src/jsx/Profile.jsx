@@ -52,9 +52,9 @@ const Profile = () => {
       <nav className="top-navbar">
         <div className="nav-brand"><div className="brand-logo">S</div> SplitWise</div>
         <div className="nav-center">
-          <a onClick={() => handleClick('/Dashboard')} className="nav-link">Dashboard</a>
-          <a onClick={() => handleClick('/GroupList')} className="nav-link">Groups</a>
-          <a onClick={() => handleClick('/Profile')} className="nav-link active">Profile</a>
+          <a onClick={() => navigate('/Dashboard')} className="nav-link">Dashboard</a>
+          <a onClick={() => navigate('/GroupList')} className="nav-link">Groups</a>
+          <a onClick={() => navigate('/Profile')} className="nav-link active">Profile</a>
         </div>
         <div className="nav-right"><span>Hey, {UserName}</span></div>
       </nav>
