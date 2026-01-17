@@ -75,7 +75,7 @@ const cleanMembers = members
     try{
       console.log("MEMBERS BEFORE SUBMIT:", cleanMembers);
 
-      const response = await fetch('http://localhost:5000/api/auth/CreateGroup', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/CreateGroup`, {
         method: "POST",
         headers:  {
           'Content-Type': 'application/json',

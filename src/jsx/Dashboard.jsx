@@ -36,7 +36,7 @@ const Dashboard = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   if(!user) return navigate("/Login");
 
-  fetch(`http://localhost:5000/api/auth/dashboard/${user.id}`)
+  fetch(`${import.meta.env.VITE_API_URL}/api/auth/dashboard/${user.id}`)
     .then(res => res.json())
     .then(data => {setGroups(Array.isArray(data) ? data : []) })
     .catch(err => console.error(err));
@@ -53,7 +53,7 @@ const Dashboard = () => {
 useEffect(() => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
   if (storedUser?.id) {
-    fetch(`http://localhost:5000/api/auth/dashboardSummary/${storedUser.id}`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/auth/dashboardSummary/${storedUser.id}`)
       .then(res => res.json())
       .then(data => setSummary(data))
       .catch((err) => console.error("Summary fetch error:", err));
@@ -69,7 +69,7 @@ useEffect(() => {
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     if (storedUser?.id) {
-      fetch(`http://localhost:5000/api/auth/activity/${storedUser.id}`)
+      fetch(`${import.meta.env.VITE_API_URL}/api/auth/activity/${storedUser.id}`)
         .then(res => res.json())
         .then(data => setActivity(data))
         .catch((err) => console.error("Activity fetch error:", err));

@@ -34,7 +34,7 @@ const AddExpense = () => {
   useEffect(() => {
     if (!groupId) return navigate("/GroupList");
 
-    fetch(`http://localhost:5000/api/auth/${groupId}`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/auth/${groupId}`)
       .then(res => res.json())
       .then(data => {
         setGroup(data);
@@ -95,7 +95,7 @@ const AddExpense = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch("http://localhost:5000/api/auth/AddExpense", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/AddExpense`, {
         method: "POST",
         headers: { "Content-Type": "application/json",
                    "Authorization": `Bearer ${token}`

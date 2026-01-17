@@ -40,7 +40,7 @@ const Groups = () => {
   useEffect(() => {
     if (!groupId) return;
 
-    fetch(`http://localhost:5000/api/auth/${groupId}`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/auth/${groupId}`)
       .then(res => res.json())
       .then(data => setGroup(data))
       .catch(err => console.error(err));
@@ -50,7 +50,7 @@ const Groups = () => {
     const fetchExpenses = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/auth/group/${groupId}`
+          `${import.meta.env.VITE_API_URL}/api/auth/group/${groupId}`
         );
         const data = await res.json();
 
@@ -70,7 +70,7 @@ const Groups = () => {
   useEffect(() => {
   if (!groupId) return;
 
-  fetch(`http://localhost:5000/api/auth/payment/${groupId}/settlements`)
+  fetch(`${import.meta.env.VITE_API_URL}/api/auth/payment/${groupId}/settlements`)
     .then(res => res.json())
     .then(data => {
       console.log("BACKEND SETTLEMENTS:", data);
@@ -81,7 +81,7 @@ const Groups = () => {
 
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/auth/payment/${groupId}/history`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/auth/payment/${groupId}/history`)
       .then(res => res.json())
       .then(data => setPaymentHistory(Array.isArray(data) ? data : []));
   }, [groupId]);

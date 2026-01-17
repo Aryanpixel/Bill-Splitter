@@ -23,7 +23,7 @@ const Settlement = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/auth/${groupId}`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/auth/${groupId}`)
       .then(res => res.json())
       .then(group => {
         const map = {};
@@ -42,7 +42,7 @@ const Settlement = () => {
   /* ---------- Handling Payment ---------- */
 const handleRecordPayment = async () => {
   try {
-    const response = await fetch("http://localhost:5000/api/auth/record-payment", {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/record-payment`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

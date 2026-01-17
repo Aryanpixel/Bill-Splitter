@@ -17,7 +17,7 @@ const GroupList = () => {
     if (!user) return navigate("/login");
 
     fetch(
-      `http://localhost:5000/api/auth/groups/${user.id}?email=${user.email}`
+      `${import.meta.env.VITE_API_URL}/api/auth/groups/${user.id}?email=${user.email}`
     )
       .then(res => res.json())
       .then(data => {
