@@ -1,9 +1,15 @@
 import User from '../models/User.js';
 import express from 'express';
 import bcrypt from 'bcrypt';
-
+import Expense from '../models/Expense.js';
+import Group from '../models/Group.js';
+import Payment from '../models/Payment.js';
+import jwt from 'jsonwebtoken';
 
 const router = express.Router();
+const generateToken = (id) => {
+    return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' });
+};
 
 // Signup Route
 router.post('/Signup', async (req, res) => {
@@ -34,6 +40,7 @@ router.post('/Signup', async (req, res) => {
 
         res.status(201).json({
             message: "Signup successful",
+            token: generateToken(newUser._id || User._id),
             user:{
                 id: newUser._id,
                 name: newUser.name,
@@ -42,7 +49,8 @@ router.post('/Signup', async (req, res) => {
         });
     } 
     catch(error){
-        res.status(500).json({message: "Server Error"})
+        console.log("Signup Error:", error);
+        res.status(500).json({message: data.error})
     }
 });
 
@@ -75,6 +83,7 @@ router.post("/Login", async (req, res) => {
 
     res.status(200).json({
       message: 'Login successful',
+      token: generateToken(user._id),
       user: {
         id: user._id,
         name: user.name,
@@ -86,6 +95,50 @@ router.post("/Login", async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+
+
+// Delete Account Route
+router.delete("/delete-account/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    //  Removes user from all groups they are members of
+    await Group.updateMany(
+      { members: userId },
+      { $pull: { members: userId } }
+    );
+
+    //  Delete groups created by this user
+    await Group.deleteMany({ createdBy: userId });
+
+    // Delete expenses paid by this user
+    await Expense.deleteMany({ paidBy: userId });
+
+    //  Removes user from splitAmong arrays in other expenses
+    await Expense.updateMany(
+      { "splitAmong.user": userId },
+      { $pull: { splitAmong: { user: userId } } }
+    );
+
+    // Delete payments involving this user
+    await Payment.deleteMany({
+      $or: [{ from: userId }, { to: userId }]
+    });
+
+    //  delete the user document
+    const deletedUser = await User.findByIdAndDelete(userId);
+
+    if (!deletedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({ message: "Account and all associated data wiped successfully" });
+  } catch (error) {
+    console.error("Delete account error:", error);
+    res.status(500).json({ message: "Server error during account deletion" });
+  }
+});
+
 
 export default router;
 

@@ -2,13 +2,14 @@ import express from "express";
 import Expense from "../models/Expense.js";
 import Group from "../models/Group.js";
 import User from "../models/User.js";
+import protect from '../middleware/authMiddleware.js';
 
 
 const router = express.Router();
 
 
 
-router.post("/AddExpense", async (req, res) => {
+router.post("/AddExpense", protect, async (req, res) => {
   try {
     const { groupId, description, amount, category, splitMethod, paidBy, splitAmong} = req.body;
 
@@ -75,7 +76,8 @@ router.post("/AddExpense", async (req, res) => {
       }));
     }
 
-    const expense = await Expense.create({
+    // Creating Expendse
+    const expense = await Expense.create({ 
       group: groupId,
       description,
       amount,

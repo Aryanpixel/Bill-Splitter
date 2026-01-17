@@ -5,15 +5,15 @@ import auth from "./routes/auth.js";
 import groupRoutes from "./routes/groups.js"
 import expenseRoutes from "./routes/expenses.js";
 import paymentRoutes from "./routes/payment.js";
+import dotenv from 'dotenv';
 
 
 
-
-
+dotenv.config();
 
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 
 

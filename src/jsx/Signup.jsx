@@ -18,9 +18,6 @@ const Signup = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleClick = (page) => {
-    navigate(page); 
-  };
 
 
   const handleSignup = async (e) => {
@@ -67,7 +64,7 @@ const Signup = () => {
 
       {/* RIGHT SIDE: Form */}
       <div className="signup-split signup-form-container">
-        <a onClick={() => handleClick('/')} className="signup-back-link">← Back to home</a>
+        <a onClick={() => navigate('/')} className="signup-back-link">← Back to home</a>
         
         <div className="signup-header">
           <div className="signup-brand">
@@ -136,7 +133,7 @@ const Signup = () => {
         </form>
 
         <p className="login-redirect">
-          Already have an account? <a onClick={() => handleClick('/Login')} className="link-primary">Sign in</a>
+          Already have an account? <a onClick={() => navigate('/Login')} className="link-primary">Sign in</a>
         </p>
       </div>
 

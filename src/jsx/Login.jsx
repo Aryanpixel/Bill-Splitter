@@ -8,9 +8,6 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleClick = (page) => {
-    navigate(page);
-  };
 
   // login handling
   const handleLogin = async (e) => {
@@ -29,6 +26,7 @@ const Login = () => {
 
       if (response.ok) {
         // storing user
+        localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
         navigate('/Dashboard');
 
@@ -45,7 +43,7 @@ const Login = () => {
       
       {/* LEFT SIDE: Form */}
       <div className="login-split login-form-container">
-        <a onClick={() => handleClick('/')} className="login-back-link">
+        <a onClick={() => navigate('/')} className="login-back-link">
           ← Back to home
         </a>
         
@@ -104,7 +102,7 @@ const Login = () => {
 
         <p className="signup-redirect">
           Don't have an account?{' '}
-          <a onClick={() => handleClick('/Signup')} className="link-primary">
+          <a onClick={() => navigate('/Signup')} className="link-primary">
             Sign up free
           </a>
         </p>

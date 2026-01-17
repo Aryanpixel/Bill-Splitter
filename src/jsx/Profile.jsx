@@ -4,26 +4,47 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/Profile.css';
 
 const Profile = () => {
-  const navigate = useNavigate();
+ const navigate = useNavigate();
+  const [UserName, setUserName] = useState("");
+  const [UserEmail, setUserEmail] = useState("");
+  const [UserId, setUserId] = useState(""); // Add UserId state
 
-  const handleClick = (page) => {
-    //  to change the URL to the specified page
-    navigate(page); 
-  };
-
-  const[UserName, setUserName]= useState("");
-  const[UserEmail, setUserEmail] = useState("");
   useEffect(() => {
-
-    try{
-      const storedUser =JSON.parse(localStorage.getItem("user"))
-      setUserName(storedUser.name)
-      setUserEmail(storedUser.email)
-    } catch (error){
+    try {
+      const storedUser = JSON.parse(localStorage.getItem("user"));
+      setUserName(storedUser.name);
+      setUserEmail(storedUser.email);
+      setUserId(storedUser.id); // Set UserId from local storage
+    } catch (error) {
       navigate("/Login");
     }
-    
-  },[navigate]);
+  }, [navigate]);
+
+  const handleDeleteAccount = async () => {
+    const confirmDelete = window.confirm(
+      "Are you sure? This will permanently delete your account and all your data from all groups. This action cannot be undone."
+    );
+
+    if (confirmDelete) {
+      try {
+        const response = await fetch(`http://localhost:5000/api/auth/delete-account/${UserId}`, {
+          method: 'DELETE',
+        });
+
+        if (response.ok) {
+          alert("Account deleted successfully.");
+          localStorage.removeItem("user"); // Clear local session
+          navigate("/Signup");
+        } else {
+          const data = await response.json();
+          alert(data.message || "Failed to delete account.");
+        }
+      } catch (error) {
+        console.error("Error deleting account:", error);
+        alert("An error occurred. Please try again.");
+      }
+    }
+  };
 
 
   return (
@@ -63,6 +84,21 @@ const Profile = () => {
                <input type="email" className="form-input" defaultValue= {`${UserEmail}`} />
              </div>
              <button className="btn-primary btn-full">Save Changes</button>
+
+          <div>
+            {/* Add Delete Section */}
+             <div style={{ marginTop: '30px', borderTop: '1px solid #eee', paddingTop: '20px' }}>
+               <h3 style={{ color: '#d9534f' }}>Danger Zone</h3>
+               <p className="subtitle">Once you delete your account, there is no going back.</p>
+               <button 
+                 onClick={handleDeleteAccount} 
+                 className="btn-full" 
+                 style={{ backgroundColor: '#d9534f', color: 'white', border: 'none', padding: '10px', borderRadius: '4px', cursor: 'pointer' }}
+               >
+                 Delete Account
+               </button>
+              </div>
+            </div>
           </div>
         </div>
       </main>
@@ -70,3 +106,4 @@ const Profile = () => {
   );
 };
 export default Profile;
+
