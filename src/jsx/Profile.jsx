@@ -50,7 +50,7 @@ const Profile = () => {
   return (
     <div className="dashboard-container">
       <nav className="top-navbar">
-        <div className="nav-brand"><div className="brand-logo">S</div> SplitWise</div>
+        <div className="nav-brand"><div className="brand-logo">S</div> SplitX</div>
         <div className="nav-center">
           <a onClick={() => navigate('/Dashboard')} className="nav-link">Dashboard</a>
           <a onClick={() => navigate('/GroupList')} className="nav-link">Groups</a>

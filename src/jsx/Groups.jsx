@@ -112,7 +112,7 @@ const Groups = () => {
     <div className="dashboard-container">
       {/* Navbar */}
       <nav className="top-navbar">
-        <div className="nav-brand"><div className="brand-logo">S</div> SplitWise</div>
+        <div className="nav-brand"><div className="brand-logo">S</div> SplitX</div>
         <div className="nav-center">
           <a onClick={() => handleClick('/Dashboard')} className="nav-link">Dashboard</a>
           <a onClick={() => handleClick('/GroupList')} className="nav-link active">Groups</a>

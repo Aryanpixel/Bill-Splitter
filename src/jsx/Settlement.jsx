@@ -83,7 +83,7 @@ const handleRecordPayment = async () => {
     <div className="dashboard-container">
       <nav className="top-navbar">
         <div className="nav-brand">
-          <div className="brand-logo">S</div> SplitWise
+          <div className="brand-logo">S</div> SplitX
         </div>
         <div className="nav-center">
           <a onClick={() => navigate("/Dashboard")} className="nav-link">
